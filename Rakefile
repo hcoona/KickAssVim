@@ -106,7 +106,7 @@ Bundle "tpope/vim-fugitive"
 Bundle "sjl/gundo.vim" # provides an undo graph window
 # Bundle "henrik/vim-indexed-search"
 # Bundle "hallettj/jslint.vim"
-Bundle "tsaleh/vim-matchit"
+# Bundle "vim-scripts/matchit.zip"
 Bundle "MarcWeber/vim-addon-mw-utils" # (snipmate dependency) interpret a file by function and cache file automatically
 # Bundle "ddollar/nerdcommenter" # easy syntax appropriate commenting
 Bundle "scrooloose/nerdtree" # provides a file system tree view
