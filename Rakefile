@@ -142,6 +142,7 @@ Bundle "sjl/vitality.vim" # enables a thin cursor while in insert mode in consol
 Bundle "vim-scripts/YankRing.vim" # provides a yank buffer history
 # Bundle "mattn/zencoding-vim"
 Bundle "vim-scripts/ZoomWin" # enables temporary full screen for a viewport
+Bundle "editorconfig/editorconfig-vim"
 
 # plugins used by Janus:
 # ap/vim-css-color
