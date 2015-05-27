@@ -21,7 +21,8 @@ set softtabstop=2
 
 " Vim Tip #989: Word wrap without line breaks
 set nowrap                        " don't wrap lines
-set textwidth=80                  " 80-character lines maximum
+"set textwidth=80                  " 80-character lines maximum
+set textwidth=0
 set linebreak                     " try not to wrap in the middle of a word
 set showbreak=...
 
