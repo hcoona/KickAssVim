@@ -1,25 +1,13 @@
 " loads display-related options
 
-" fix arrow keys in console mode
-if !(has('gui_running') || has('win32'))
-  set term=ansi
-endif
-
-if $COLORTERM == 'gnome-terminal'
-  set term=gnome-256color
-  " colorscheme desert256
-endif
-
-" Default color Scheme
-colorscheme ir_black
-
 set number         " show line numbers
-set ruler          " display coordinates in status bar
+" set ruler " set in sensible.vim         " display coordinates in status bar
 set rulerformat=%=%l/%L " show current line info (current/total)
 set showcmd        " display unfinished commands
 set showmatch      " show matching bracket (briefly jump)
 set showmode       " display the current mode in the status bar
 set title          " show file in titlebar
+set cursorline     " highlight current line
 
 " Open new split panes to right and bottom, which feels more natural
 set splitbelow
@@ -31,29 +19,12 @@ highlight MatchParen ctermbg=4
 "dont load csapprox if there is no gui support - silences an annoying warning
 let g:CSApprox_loaded = 1
 
-syntax enable         " Turn on syntax highlighting allowing local overrides
-
-" adjust highlight color
-highlight CursorLine term=none cterm=none ctermbg=3
-
-" we plan to use a dark background
-set background=dark
-
 " Smoother redraws
 set ttyfast
 
-" have the mouse enabled all the time
-set mouse=a
-
 " allow lots of tabs
-set tabpagemax=20
-
-" If in diff mode (vimdiff) use the inkpot color scheme
-" that better highlights file differences
-if &diff
-  colors inkpot    " Vim Tip #1143
-endif
-
+" set tabpagemax=20 "set in sensible.vim
+"
 " turn off the error beep
 set vb t_vb=
 
@@ -64,26 +35,10 @@ set visualbell t_vb=
 set linespace=4
 
 " When lines are cropped at the screen bottom, show as much as possible "
-set display=lastline
+" set display=lastline " set in sensible.vim
 
-" I don't know what this does HAS
-"let g:rct_completion_use_fri = 1
-
-" WTF does this do? HAS
-"let ScreenShot = {'Icon':0, 'Credits':0, 'force_background':'#FFFFFF'}
-
-"define :HighlightLongLines command to highlight the offending parts of
-"lines that are longer than the specified length (defaulting to 80)
-command! -nargs=? HighlightLongLines call s:HighlightLongLines('<args>')
-
-function! s:HighlightLongLines(width)
-  let targetWidth = a:width != '' ? a:width : 79
-  if targetWidth > 0
-    exec 'match Todo /\%>' . (targetWidth) . 'v/'
-  else
-    echomsg "Usage: HighlightLongLines [natural number]"
-  endif
-endfunction
+" Removes dollar signs from end of lines
+set nolist
 
 " shortmess settings:
 " f - use "(3 of 5)" instead of "(file 3 of 5)"
@@ -102,9 +57,9 @@ endfunction
 set shortmess=filmnrxtTI
 
 " status bar
-
+" Do I need any of this since I'm using airline?
 if has("statusline") && !&cp
-  set laststatus=2 " always show the status bar
+  " set laststatus=2 set in sensible.vim " always show the status bar
 
   "set statusline+=%f\                                           " filename
   "set statusline+=[%{strlen(&ft)?&ft:'none'}]                   " filetype
@@ -113,13 +68,6 @@ if has("statusline") && !&cp
   "set statusline+=%{fugitive#statusline()}                      " git status
   "set statusline+=%{exists('g:loaded_rvm')?rvm#statusline():''} " rvm status
   "set statusline+=(%l,%c%V)\ %<%P                               " offset
-
-  " Janus default
-  " set statusline=%f\ %m\ %r
-  " set statusline+=Line:%l/%L[%p%%]
-  " set statusline+=Col:%v
-  " set statusline+=Buf:#%n
-  " set statusline+=[%b][0x%B]
 
   set statusline=%f\      "tail of the filename
   "set statusline+=%=     "left/right separator
@@ -130,6 +78,11 @@ if has("statusline") && !&cp
 
   " TODO check for Git
   "set statusline+=[%{GitBranch()}]
+
+  " enable narrow cursor in insert mode:
+  if has('nvim')
+      let $NVIM_TUI_ENABLE_CURSOR_SHAPE = 1
+  endif
 
   " augment status line
   function! ETry(function, ...)

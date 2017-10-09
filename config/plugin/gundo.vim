@@ -1,9 +1,6 @@
-" gundo specific settings
-
-nnoremap <F5> :GundoToggle<CR>
-
-" open on the right so as not to compete with the nerdtree
-let g:gundo_right = 1
-
-" a little wider for wider screens
-" let g:gundo_width = 60
+nnoremap <leader>u :GundoToggle<CR>
+" settings with defaults listed
+" let g:gundo_width = 30            " 45
+" let g:gundo_preview_height = 26   " 15
+" let g:gundo_right = 1             " 0
+" let g:gundo_preview_bottom = 0    " 0

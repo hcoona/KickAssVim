@@ -13,11 +13,7 @@ set smartindent
 set whichwrap+=<,>,h,l
 
 " Whitespace
-set tabstop=2                     " a tab is two spaces
-set shiftwidth=2                  " an autoindent (with <<) is two spaces
-set expandtab                     " use spaces, not tabs
 set list                          " Show invisible characters
-set softtabstop=2
 
 " Vim Tip #989: Word wrap without line breaks
 set nowrap                        " don't wrap lines
@@ -31,7 +27,7 @@ set foldnestmax=3       "deepest fold is 3 levels
 set nofoldenable        "dont fold by default
 
 " automatically reload a file if it's changed outside vim
-set autoread
+" set autoread " set in sensible.vim
 
 " Avoid vim complains about not written file when jumping
 " between buffers using ctags
@@ -56,16 +52,16 @@ set autowrite
 
 set formatoptions+=l
 
-"dont continue comments when pushing o/O
+" Don't continue comments when pushing o/O
 set formatoptions-=o
 
 " % to bounce from do to end etc.
-runtime! macros/matchit.vim
+" runtime! macros/matchit.vim " set in sensible.vim
 
 "folding settings
 set foldmethod=syntax
 set foldnestmax=3       "deepest fold is 3 levels
-set nofoldenable        "dont fold by default
+set nofoldenable        "don't fold by default
 
 set grepprg=grep\ -nH\ $*
 
@@ -79,15 +75,30 @@ else
 endif
 set langmenu=non
 
-" Use english for spellchecking, but don't spellcheck by default
+" Use English for spellchecking, but don't spellcheck by default
 if version >= 700
-  set spl=en spell
-  set nospell
+  " set spl=en spell
+  " set spell spelllang=en_us
+  " set spell
+
+  " press CTRL-N or CTRL-P in insert-mode to complete the word you're typing
+  set complete+=kspell
+
+  " Notes on spell:
+  " cursor over a misspelled word and type zg to add it to the dictionary.
+  " use z=, and Vim will suggest a list of alternatives
+  " hit Enter if none of the suggestions work, or enter the number for the correct word.
+  " ]s will move the cursor to the next misspelled word. [s will move the cursor back previous misspelled words.
 endif
 
+" toggle spell checking
+nn <F7> :set spell! spell? spelllang=en_us<CR>
+" turn off spelling by default
+set nospell
+
 " Enable mouse support in console
+" This will not work if you have: set term=ansi
 set mouse=a
-set ttymouse=xterm2
 
 if $COLORTERM == 'gnome-terminal'
   let g:clipbrdDefaultReg = '+'
@@ -96,21 +107,13 @@ endif
 " Universal clipboard
 set clipboard=unnamed
 
+" Use the system clipboard in Unix
+nnoremap <C-y> "+y
+vnoremap <C-y> "+y
+" nnoremap <C-p> "+gP
+" vnoremap <C-p> "+gP
+
 " Use modeline overrides
 set modeline
 set modelines=10
 
-" use tab-complete to see a list of possiblities when entering commands
-set wildmode=list:full
-set wildmode=list:longest
-set wildmenu                "enable ctrl-n and ctrl-p to scroll thru matches
-set wildignore=*.o,*.obj,*~ "stuff to ignore when tab completing
-set wildignore+=*vim/backups*
-set wildignore+=*sass-cache*
-set wildignore+=*DS_Store*
-set wildignore+=vendor/rails/**
-set wildignore+=vendor/cache/**
-set wildignore+=*.gem
-set wildignore+=log/**
-set wildignore+=tmp/**
-set wildignore+=*.png,*.jpg,*.gif

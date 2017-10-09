@@ -1,5 +1,11 @@
-IDEs
-BDD
-MVC
-ActiveRecord
-ORM
+modeline
+templateUrl
+resolvedUrl
+basePath
+substr
+noremap
+CloseWindow
+nohls
+nnoremap
+inoremap
+Esc
